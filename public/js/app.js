@@ -22,5 +22,6 @@ weatherForm.addEventListener('submit', async (e) => {
 
   error.textContent = '';
   temperature.textContent = current.temperature;
+  feelsLike.textContent = current.feelslike;
   loc.textContent = `${location.name}, ${location.region}, ${location.country}`;
 });
