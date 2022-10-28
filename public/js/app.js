@@ -10,7 +10,7 @@ weatherForm.addEventListener('submit', async (e) => {
   const searchValue = search.value;
   const error = document.querySelector('#error');
   
-  const response = await fetch(`http://localhost:3000/weather?city=${searchValue}`);
+  const response = await fetch(`/weather?city=${searchValue}`);
   const data = await response.json();
   
   if (data.error) {
