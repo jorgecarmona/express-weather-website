@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get the Weather!</title>
+    <link rel="icon" href="../img/weather.png">
+    <link rel="stylesheet" href="./css/styls.css">
+  </head>
+  <body>
+    <div class="main-content">
+      {{>header}}
+
+      <p>Use this site to get your weather!</p>
+
+      <form>
+        <input name="search" type="text" placeholder="Location" />
+        <button>Search</button>
+      </form>
+
+      <section>
+        <p id="error"></p>
+      </section>
+
+      <section>
+        <p>
+          <span>Location:</span>
+          <strong>
+            <span id="location">None Selected</span>
+          </strong>
+        </p>
+
+        <table>
+          <tr>
+            <td>
+              <p>
+                <span class="big-number" id="temperature">0</span>
+                <div>Temperature</div>
+              </p>
+            </td>
+            <td>
+              <p>
+                <span class="big-number" id="feels-like">0</span>
+                <div>Feels Like</div>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </section>
+    </div>
+    
+    {{>footer}}
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>
