@@ -1,15 +1,17 @@
 import '../env.js';
 
 // Needed for require to work in esm application
-import {createRequire} from 'module';
-const require = createRequire(import.meta.url);
+// import {createRequire} from 'module';
+// const require = createRequire(import.meta.url);
 
-const request = require('postman-request');
+// const request = require('postman-request');
 
 import path from 'path';
 import {fileURLToPath} from 'url';
 import express from 'express';
 import hbs from 'hbs';
+
+import forecast from './utils/forecast.js';
 
 // ESM specific features
 const __filename = fileURLToPath(import.meta.url);
@@ -55,10 +57,6 @@ app.get('/help', (req, res) => {
 
 app.get('/weather', (req, res) => {
   const cityParam = req.query?.city;
-  const apiUrl = process.env.WEATHER_API_URL;
-  const key = process.env.WEATHER_API_KEY;
-  const units = process.env.WEATHER_UNITS_FAHRENHEIT;
-  const url = `${apiUrl}?access_key=${key}&query=${cityParam}&units=${units}`;
 
   if (!cityParam) {
     return res.send({
@@ -66,20 +64,12 @@ app.get('/weather', (req, res) => {
     })
   }
 
-  request({url, json: true}, (error, response) => {
+  forecast(cityParam, (error, body) => {
     if (error) {
-      return res.send({
-        error: 'Unable to get weather data.'
-      });
+      res.send({error});
+    } else {
+      res.send(body);
     }
-
-    if (response.body.error) {
-      return res.send({
-        error: 'Unable to find location. Try another search.'
-      });
-    }
-
-    res.send(response);
   });
 });
 
