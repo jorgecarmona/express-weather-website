@@ -9,6 +9,7 @@ weatherForm.addEventListener('submit', async (e) => {
 
   const searchValue = search.value;
   const error = document.querySelector('#error');
+  loc.textContent = 'Loading...';
   
   const response = await fetch(`/weather?city=${searchValue}`);
   const data = await response.json();
